@@ -4,7 +4,13 @@
 A serverless pipeline that labels images automatically. Uploading an image to the `uploads/` folder of an S3 bucket triggers a Lambda function, which asks Amazon Rekognition to detect labels and saves the results as a JSON file in the `results/` folder.
 
 ## Architecture
-S3 (uploads/) -> Lambda function -> Rekognition DetectLabels -> S3 (results/)
+```mermaid
+flowchart LR
+    A[Upload image to S3 uploads/] --> B[Lambda function]
+    B --> C[Rekognition DetectLabels]
+    C --> B
+    B --> D[Save JSON to S3 results/]
+```
 
 ## Key decisions
 - **Least privilege:** the Lambda role can only read from `uploads/`, write to `results/`, and call Rekognition DetectLabels. It has no access to the rest of the bucket.
