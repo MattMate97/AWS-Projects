@@ -20,6 +20,7 @@ flowchart LR
 
 ## Example result
 A photo of a pug returned labels including Animal, Mammal, Pet, Dog and Pug, with Pug at about 98.6% confidence.
+![Result JSON from the Lambda function](result.png)
 
 ## What went wrong and how I fixed it
 Rekognition rejected my first test image. The file was named photo.jpg, but its contents were WebP, which Rekognition does not support (it accepts JPEG and PNG). Rekognition reads the file contents, not the extension. I converted the image to a real JPEG and it worked.
